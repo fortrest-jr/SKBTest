@@ -61,7 +61,7 @@ class CellListPage(BasePage):
         self.find_element(CellListLocators.LOCATOR_CONTACTS_LIST).send_keys(Keys.END)
         total_length = self.get_total_list_length()
         expected_length = min(current_length + 20, total_length)
-        self.elements_text_contain_text(CellListLocators.LOCATOR_CONTACTS_LIST_COUNTERS, str(expected_length))
+        self.elements_text_contain_text(CellListLocators.LOCATOR_CONTACTS_LIST_COUNTERS, str(expected_length), 10)
 
     def scroll_to_list_end(self):
         while True:

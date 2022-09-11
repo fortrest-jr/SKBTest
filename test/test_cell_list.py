@@ -58,7 +58,7 @@ def test_create_full_contact(browser, test_contact):
     assert info_contact == test_contact
 
 
-@allure.description('Test no contact is created if all fields is not filled')
+@allure.description('Test no contact is created if all fields are not filled')
 def test_empty_contact_creation_attempt_do_not_increment_counter(browser):
     cell_list_page = CellListPage(browser)
     cell_list_page.open()
