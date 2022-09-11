@@ -351,3 +351,5 @@ dmypy.json
 # Cython debug symbols
 cython_debug/
 
+!/failures
+!/allure-result/
