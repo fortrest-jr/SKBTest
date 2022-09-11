@@ -1,4 +1,6 @@
 # -*- coding: utf-8 -*-
+import allure
+import pytest
 
 from CellList import CellListPage
 
@@ -10,10 +12,10 @@ def refresh_and_get_contact_info(page, index):
     return page.get_contact_from_contact_info()
 
 
-def test_get_contact_info_from_list(driver):
-    index_to_get = 0
-
-    cell_list_page = CellListPage(driver)
+@allure.description('Test loading correct info from selected item in list')
+@pytest.mark.parametrize('index_to_get', [0])
+def test_get_contact_info_from_list(browser, index_to_get):
+    cell_list_page = CellListPage(browser)
     cell_list_page.open()
     cell_list_page.select_contact_from_list(index_to_get)
     list_contact = cell_list_page.get_contact_from_list(index_to_get)
@@ -22,10 +24,10 @@ def test_get_contact_info_from_list(driver):
     assert list_contact == info_contact
 
 
-def test_update_contact(driver, test_contact):
-    index_to_update = 0
-
-    cell_list_page = CellListPage(driver)
+@allure.description('Test updating info in selected item in list')
+@pytest.mark.parametrize('index_to_update', [0])
+def test_update_contact(browser, test_contact, index_to_update):
+    cell_list_page = CellListPage(browser)
     cell_list_page.open()
     cell_list_page.select_contact_from_list(index_to_update)
     cell_list_page.fill_contact_info(test_contact)
@@ -37,8 +39,9 @@ def test_update_contact(driver, test_contact):
     assert info_contact == test_contact
 
 
-def test_create_full_contact(driver, test_contact):
-    cell_list_page = CellListPage(driver)
+@allure.description('Test creating new contact and loading it from list')
+def test_create_full_contact(browser, test_contact):
+    cell_list_page = CellListPage(browser)
     cell_list_page.open()
 
     old_total_length = cell_list_page.get_total_list_length()
@@ -55,8 +58,9 @@ def test_create_full_contact(driver, test_contact):
     assert info_contact == test_contact
 
 
-def test_empty_contact_creation_attempt_dont_increments_counter(driver):
-    cell_list_page = CellListPage(driver)
+@allure.description('Test no contact is created if all fields is not filled')
+def test_empty_contact_creation_attempt_do_not_increment_counter(browser):
+    cell_list_page = CellListPage(browser)
     cell_list_page.open()
 
     old_total_length = cell_list_page.get_total_list_length()
