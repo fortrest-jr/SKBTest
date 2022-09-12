@@ -41,7 +41,7 @@ def test_update_contact(browser, test_contact, index_to_update):
     assert info_contact == test_contact
 
 
-@allure.description('Test creating new contact and loading it from list')
+@allure.description('Test creating new contact with all fields filled and loading it from list')
 def test_create_full_contact(browser, test_contact):
     cell_list_page = CellListPage(browser)
     cell_list_page.open()
